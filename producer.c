@@ -48,7 +48,7 @@ int main()
         sem_wait(&tbl->empty);
         pthread_mutex_lock(&tbl->mutexControl);
 		// aquires the lock from the binary semaphore
-		// ensuring that producer cannot access critical section
+		// ensuring that consumer cannot access critical section
         printf("\n***Producer entering critical section***");
 
         while (tbl->counter < tableSize) {
@@ -61,7 +61,7 @@ int main()
         printf("\n***Producer exiting critical section***\n");
         pthread_mutex_unlock(&tbl->mutexControl);
 		// releases the lock from the binary semaphore
-		// allowing the producer to access its critical section
+		// allowing the consumer to access its critical section
         sem_post(&tbl->full);
 		// increment Semaphore(full), allowing the consumer to enter critical section
         
